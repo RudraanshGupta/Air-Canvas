@@ -27,3 +27,15 @@ paintWindow = cv2.rectangle(paintWindow, (160,1), (255,65), (255,0,0), 2)
 paintWindow = cv2.rectangle(paintWindow, (275,1), (370,65), (0,255,0), 2)
 paintWindow = cv2.rectangle(paintWindow, (390,1), (485,65), (0,0,255), 2)
 paintWindow = cv2.rectangle(paintWindow, (505,1), (600,65), (0,255,255), 2)
+
+cv2.putText(paintWindow, "CLEAR", (49, 33), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2, cv2.LINE_AA)
+cv2.putText(paintWindow, "BLUE", (185, 33), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2, cv2.LINE_AA)
+cv2.putText(paintWindow, "GREEN", (298, 33), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2, cv2.LINE_AA)
+cv2.putText(paintWindow, "RED", (420, 33), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2, cv2.LINE_AA)
+cv2.putText(paintWindow, "YELLOW", (520, 33), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2, cv2.LINE_AA)
+cv2.namedWindow('Paint', cv2.WINDOW_AUTOSIZE)
+
+# Initialize mediapipe
+mpHands = mp.solutions.hands
+hands = mpHands.Hands(max_num_hands=2, min_detection_confidence=0.7)
+mpDraw = mp.solutions.drawing_utils
