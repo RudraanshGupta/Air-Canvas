@@ -39,3 +39,18 @@ cv2.namedWindow('Paint', cv2.WINDOW_AUTOSIZE)
 mpHands = mp.solutions.hands
 hands = mpHands.Hands(max_num_hands=2, min_detection_confidence=0.7)
 mpDraw = mp.solutions.drawing_utils
+
+# Initialize the webcam
+cap = cv2.VideoCapture(0)
+ret = True
+while ret:
+    # Read each frame from the webcam
+    ret, frame = cap.read()
+
+    x, y, c = frame.shape
+
+    # Flip the frame vertically
+    frame = cv2.flip(frame, 1)
+    # Convert the frame color from BGR to RGB
+    framergb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+
