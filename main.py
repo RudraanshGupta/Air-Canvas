@@ -53,4 +53,15 @@ while ret:
     frame = cv2.flip(frame, 1)
     # Convert the frame color from BGR to RGB
     framergb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-
+    
+    # Drawing the rectangles on the frame
+    frame = cv2.rectangle(frame, (40,1), (140,65), (0,0,0), 2)
+    frame = cv2.rectangle(frame, (160,1), (255,65), (255,0,0), 2)
+    frame = cv2.rectangle(frame, (275,1), (370,65), (0,255,0), 2)
+    frame = cv2.rectangle(frame, (390,1), (485,65), (0,0,255), 2)
+    frame = cv2.rectangle(frame, (505,1), (600,65), (0,255,255), 2)
+    cv2.putText(frame, "CLEAR", (49, 33), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2, cv2.LINE_AA)
+    cv2.putText(frame, "BLUE", (185, 33), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2, cv2.LINE_AA)
+    cv2.putText(frame, "GREEN", (298, 33), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2, cv2.LINE_AA)
+    cv2.putText(frame, "RED", (420, 33), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2, cv2.LINE_AA)
+    cv2.putText(frame, "YELLOW", (520, 33), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2, cv2.LINE_AA)
