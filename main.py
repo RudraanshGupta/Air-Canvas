@@ -65,5 +65,19 @@ while ret:
     cv2.putText(frame, "GREEN", (298, 33), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2, cv2.LINE_AA)
     cv2.putText(frame, "RED", (420, 33), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2, cv2.LINE_AA)
     cv2.putText(frame, "YELLOW", (520, 33), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2, cv2.LINE_AA)
-    cv2.namedWindow('Paint', cv2.WINDOW_AUTOSIZE)
+    
+    # Get hand landmark prediction
+    result = hands.process(framergb)
 
+    # Post process the result
+    if result.multi_hand_landmarks:
+        landmarks = []
+        for handslms in result.multi_hand_landmarks:
+            for lm in handslms.landmark:
+                lmx = int(lm.x * 640)
+                lmy = int(lm.y * 480)
+                landmarks.append([lmx, lmy])
+
+            # Drawing landmarks on frames
+            mpDraw.draw_landmarks(frame, handslms, mpHands.HAND_CONNECTIONS)
+    
