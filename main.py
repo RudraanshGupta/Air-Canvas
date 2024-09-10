@@ -95,5 +95,18 @@ while ret:
             rpoints.append(deque(maxlen=512))
             red_index += 1
             ypoints.append(deque(maxlen=512))
-            yellow_index += 1         
+            yellow_index += 1     
+
+        # Checking for clicks on the top buttons
+        elif center[1] <= 65:
+            if 40 <= center[0] <= 140: # Clear Button
+                bpoints = [deque(maxlen=512)]
+                gpoints = [deque(maxlen=512)]
+                rpoints = [deque(maxlen=512)]
+                ypoints = [deque(maxlen=512)]
+
+                blue_index = 0
+                green_index = 0
+                red_index = 0
+                yellow_index = 0
     
