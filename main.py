@@ -1,3 +1,4 @@
+# All the imports go here
 import cv2
 import numpy as np
 import mediapipe as mp
@@ -15,12 +16,13 @@ green_index = 0
 red_index = 0
 yellow_index = 0
 
+# The kernel to be used for dilation purpose 
 kernel = np.ones((5,5),np.uint8)
 
 colors = [(255, 0, 0), (0, 255, 0), (0, 0, 255), (0, 255, 255)]
 colorIndex = 0
 
-# code for Canvas setup
+# Here is code for Canvas setup
 paintWindow = np.zeros((471,636,3)) + 255
 paintWindow = cv2.rectangle(paintWindow, (40,1), (140,65), (0,0,0), 2)
 paintWindow = cv2.rectangle(paintWindow, (160,1), (255,65), (255,0,0), 2)
@@ -53,7 +55,7 @@ while ret:
     frame = cv2.flip(frame, 1)
     # Convert the frame color from BGR to RGB
     framergb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-    
+
     # Drawing the rectangles on the frame
     frame = cv2.rectangle(frame, (40,1), (140,65), (0,0,0), 2)
     frame = cv2.rectangle(frame, (160,1), (255,65), (255,0,0), 2)
@@ -65,7 +67,7 @@ while ret:
     cv2.putText(frame, "GREEN", (298, 33), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2, cv2.LINE_AA)
     cv2.putText(frame, "RED", (420, 33), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2, cv2.LINE_AA)
     cv2.putText(frame, "YELLOW", (520, 33), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2, cv2.LINE_AA)
-    
+
     # Get hand landmark prediction
     result = hands.process(framergb)
 
@@ -80,7 +82,8 @@ while ret:
 
             # Drawing landmarks on frames
             mpDraw.draw_landmarks(frame, handslms, mpHands.HAND_CONNECTIONS)
-    # Getting the position of the index finger tip and thumb tip
+
+        # Getting the position of the index finger tip and thumb tip
         fore_finger = (landmarks[8][0],landmarks[8][1])
         center = fore_finger
         thumb = (landmarks[4][0],landmarks[4][1])
@@ -95,7 +98,7 @@ while ret:
             rpoints.append(deque(maxlen=512))
             red_index += 1
             ypoints.append(deque(maxlen=512))
-            yellow_index += 1     
+            yellow_index += 1
 
         # Checking for clicks on the top buttons
         elif center[1] <= 65:
@@ -109,7 +112,7 @@ while ret:
                 green_index = 0
                 red_index = 0
                 yellow_index = 0
-                
+
                 paintWindow[67:,:,:] = 255
             elif 160 <= center[0] <= 255:
                     colorIndex = 0 # Blue
@@ -153,4 +156,10 @@ while ret:
     cv2.imshow("Output", frame)
     cv2.imshow("Paint", paintWindow)
 
-    
+    # Break the loop when 'q' is pressed
+    if cv2.waitKey(1) & 0xFF == ord("q"):
+        break
+
+# Release the camera and destroy all windows
+cap.release()
+cv2.destroyAllWindows()
