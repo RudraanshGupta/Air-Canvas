@@ -1,5 +1,4 @@
 # Air-Canvas
-Welcome to Air-Canvas, an innovative computer vision project built with OpenCV!
 
 Imagine being able to draw in mid-air simply by waving your finger. With Air-Canvas, this becomes a reality. This project leverages the power of computer vision to track the motion of a colored marker at the tip of your finger and translate it into drawings on a virtual canvas.
 
